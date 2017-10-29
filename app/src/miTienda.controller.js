@@ -1,21 +1,19 @@
 (function (app) {
   'use strict';
-  var MiTiendaController= function($http, StockService){
+  var MiTiendaController= function($http){
 
     var ctrl =this;
-    var articulos = "";
+
     $http.get('./src/datos.json').then(function(res) {
-      articulos = res.data;
+      ctrl.catalogo = res.data;
     });
-    var tienda = new StockService(articulos);
-    ctrl.catalogo = tienda.getCatalogo();
     ctrl.comprar= function(indice){
-      tienda.comprar(indice);
+      ctrl.catalogo[indice].stock-=1;
     };
     ctrl.checkStock= function (indice) {
-      return tienda.checkStock(indice);
+      return (ctrl.catalogo[indice].stock>0);
     }
   }
-  MiTiendaController.$inject=["$http","StockService"];
+  MiTiendaController.$inject=["$http"];
   app.controller("MiTiendaController", MiTiendaController);
 })(angular.module('MiTienda'));
