@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MiTienda">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container" ng-controller="MiTiendaController as tiendaCtrl">
+        <div class="well" ng-repeat="item in tiendaCtrl.catalogo()">
+          <img ng-src="./{{item.imagen}}" alt="Foto">
+          <p> {{::item.precio | currency}}</p>
+          <div ng-if="tienda.checkStock($index)">
+            <button ng-click="tiendaCtrl.remove($index);">Remove Item</button>
+          </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="./src/angular-locale_es-es.js"></script>
+    <script src="./src/miTienda.module.js"></script>
+    <script src="./src/miTienda.controller.js"></script>
+    <script src="./src/miTienda.service.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</body>
+
+</html>
