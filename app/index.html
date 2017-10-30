@@ -3,26 +3,31 @@
 
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Tienda de electronica</title>
 </head>
 
 <body>
-    <div class="container" ng-controller="MiTiendaController as tiendaCtrl">
-        <div class="well" ng-repeat="item in tiendaCtrl.catalogo">
-          <img ng-src="./{{item.imagen}}" alt="Foto">
-          <p> {{::item.precio | currency}}</p>
-          <div ng-if="tiendaCtrl.checkStock($index)">
-            <p>{{tiendaCtrl.catalogo[$index].stock}}</p>
-            <button ng-click="tiendaCtrl.comprar($index);">Remove Item</button>
+    <div ng-controller="MiTiendaController as tiendaCtrl">
+      <div class="container">
+        <div class="row">
+          <div  ng-repeat="item in tiendaCtrl.catalogo" class="col-sm-4">
+              <img ng-src="./{{item.imagen}}" alt="Foto">
+              <p> {{tiendaCtrl.aplicarDescuento(item) | currency}}</p>
+              <span ng-class="tiendaCtrl.labelStock(item)"> {{tiendaCtrl.stockMssg(item)}}</span>
+              <div ng-if="tiendaCtrl.checkStock(item)">
+                <button class="btn btn-primary" ng-click="tiendaCtrl.comprar(item);">Comprar</button>
+              </div>
           </div>
         </div>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script src="./src/angular-locale_es-es.js"></script>
     <script src="./src/miTienda.module.js"></script>
     <script src="./src/miTienda.controller.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="./src/miTienda.factory.js"></script>
+
 </body>
 
 </html>

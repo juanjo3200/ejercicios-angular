@@ -1,19 +1,18 @@
 (function (app) {
   'use strict';
-  var MiTiendaController= function($http){
+  var MiTiendaController= function(StockFactory){
 
     var ctrl =this;
-
-    $http.get('./src/datos.json').then(function(res) {
+    StockFactory.getCatalogo().then(function(res) {
       ctrl.catalogo = res.data;
     });
-    ctrl.comprar= function(indice){
-      ctrl.catalogo[indice].stock-=1;
-    };
-    ctrl.checkStock= function (indice) {
-      return (ctrl.catalogo[indice].stock>0);
-    }
+    ctrl.comprar=StockFactory.comprar;
+    ctrl.checkStock= StockFactory.checkStock;
+    ctrl.stockClass= StockFactory.stockClass;
+    ctrl.labelStock= StockFactory.labelStock;
+    ctrl.stockMssg= StockFactory.stockMssg;
+    ctrl.aplicarDescuento = StockFactory.aplicarDescuento;
   }
-  MiTiendaController.$inject=["$http"];
+  MiTiendaController.$inject=["StockFactory"];
   app.controller("MiTiendaController", MiTiendaController);
 })(angular.module('MiTienda'));
