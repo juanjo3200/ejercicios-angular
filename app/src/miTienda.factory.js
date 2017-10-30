@@ -35,10 +35,11 @@
              }
           },
           aplicarDescuento: function(articulo){
+            var precio = articulo.precio;
             if(typeof articulo.descuento != "undefined" && articulo.descuento>0){
-              articulo.precio=articulo.precio- articulo.descuento;
+              precio= precio- (articulo.descuento*precio)/100;
             }
-            return articulo.precio;
+            return precio;
           }
      };
  }

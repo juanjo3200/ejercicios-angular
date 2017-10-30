@@ -11,9 +11,10 @@
     <div ng-controller="MiTiendaController as tiendaCtrl">
       <div class="container">
         <div class="row">
-          <div  ng-repeat="item in tiendaCtrl.catalogo" class="col-sm-4">
-              <img ng-src="./{{item.imagen}}" alt="Foto">
-              <p> {{tiendaCtrl.aplicarDescuento(item) | currency}}</p>
+          <div  class ="col-sm-4" ng-repeat="item in tiendaCtrl.catalogo" >
+              <img ng-src="./{{item.imagen}}" alt="Foto" class="img-responsive">
+              <span class="label label-success"> Descuento : {{item.descuento}} %</span>
+              <p> {{tiendaCtrl.aplicarDescuento(item)| currency}}</p>
               <span ng-class="tiendaCtrl.labelStock(item)"> {{tiendaCtrl.stockMssg(item)}}</span>
               <div ng-if="tiendaCtrl.checkStock(item)">
                 <button class="btn btn-primary" ng-click="tiendaCtrl.comprar(item);">Comprar</button>
